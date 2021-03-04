@@ -179,7 +179,7 @@ map.on('load', function() {
 
   map.addSource('bike-grades', {
     type: 'geojson',
-    data: '/data/bike-grades.geojson'
+    data: 'data/bike-grades.geojson'
   });
 
   // add total population layer
@@ -221,7 +221,7 @@ map.on('load', function() {
 
   map.addSource('bike-routes', {
     type: 'geojson',
-    data: '/data/bicycle-routes.geojson'
+    data: 'data/bicycle-routes.geojson'
   });
 
   map.addLayer({
