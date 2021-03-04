@@ -20,26 +20,81 @@
 
 <div id = 'text-container'>
 
-  <h1 id = 'title' > How bikable is your City Council District? </h1>
+  <h1 id = 'title' > How Bikable Is Your City Council District? </h1>
 
   <p id = 'text'> The state of bicycle infrastructure varies widely across New York City.
     This simple index is designed to help you understand how well your neighborhood - and your
-    elected officials are doing - to help protect cyclists and promote low-carbon travel.
+    elected officials are doing - to help protect cyclists and promote low-carbon travel. </br> </br>
+    The index takes into account only traditional and protected bikeways on city streets, comparing the
+    mileage of these elements with the total road network in the Council District. Protected bikeways
+    are weighted more heavily than traditional lanes in making this calculation.
+    The City also installs shared streets or "sharrows" in  some areas, but these features
+    don't provide substantial protection from motor vehicles. </br> </br>
+    In the future, more information might be considered to improve this index and develop
+    actionable planning tools for neighborhoods. Additional data may include high-crash intersections
+    corridors, existing and planned street treatments such as daylighting at intersections, and
+    traffic counts with an eye towards high truck traffic areas.
   </p>
 
-  <div id = 'legend'>
+<div class = "legend">
 
-   <h2 id = 'legend-title'> Legend </h2>
+<div id = "legendtitle">
 
-   </div>
+    Bicycle Network Grades
 
 </div>
+
+<div class="color-code">
+
+  <div class="colors" id="c1"></div> </br>
+  <div class="colors" id="c2"></div> </br>
+  <div class="colors" id="c3"></div> </br>
+  <div class="colors" id="c4"></div> </br>
+  <div class="colors" id="c5"></div> </br>
+
+</div>
+
+<div class="color-labels-container">
+  <div class="color-label" id="l1">A - Widespread</div> </br>
+  <div class="color-label" id="l2">B - Adequate</div> </br>
+  <div class="color-label" id="l3">C - Limited</div> </br>
+  <div class="color-label" id="l4">D - Sparse</div> </br>
+  <div class="color-label" id="l5">F - Nonexistent</div>
+</div>
+
+  </div>
+
+<div class = "filter-container">
+
+  <div id = "filter-instructions">
+
+    Toggle to see the City's bicycle network; hover over a street segment to learn more!
+
+  </div>
+
+  <div class = "filters">
+
+    <nav id="menu"></nav>
+
+  </div>
+
+</div>
+
+<div id = sources>
+
+  Data via NYC DOT Street Centerlines
+
+</div>
+
+</div>
+
+
 
 <div id = "map-container">  </div>
 
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
-
 </div>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
 
   <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
