@@ -4,6 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoicm01MDI2IiwiYSI6ImNramJxOGd6NTFiZjYycHFzanY0e
 function numberToString(x) {
   return x.toString();
 }
+//Add council member and neighborhood information - via https://council.nyc.gov/districts/
 
 var distMember = (code) => {
   switch (code) {
@@ -163,6 +164,8 @@ var distMember = (code) => {
     }
     ;}
 
+//Setting up our map via mapboxgl
+
 var map = new mapboxgl.Map({
   container: 'map-container',
   style: 'mapbox://styles/mapbox/light-v10',
@@ -170,19 +173,26 @@ var map = new mapboxgl.Map({
   zoom: 10.0
 });
 
+//Kill scroll zoom
+
 map.scrollZoom.disable();
+
+//Add navigation control
 
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
 map.on('load', function() {
 
+//Adding our bike grades file (created via qgis)
+
   map.addSource('bike-grades', {
     type: 'geojson',
     data: 'data/bike-grades.geojson'
   });
 
-  // add total population layer
+//Add bike index layer and set colors based on index
+
   map.addLayer({
     'id': 'bike index',
     'type': 'fill',
@@ -206,7 +216,8 @@ map.on('load', function() {
     }
   })
 
-  // add outlines
+  // Add outlines
+
   map.addLayer({
     'id': 'dist-outlines',
     'type': 'line',
@@ -218,11 +229,14 @@ map.on('load', function() {
     }
   });
 
+//Add bicycle routes data from NYC DOT
 
   map.addSource('bike-routes', {
     type: 'geojson',
     data: 'data/bicycle-routes.geojson'
   });
+
+//Add bike route layer
 
   map.addLayer({
     'id': 'bike routes',
@@ -235,6 +249,7 @@ map.on('load', function() {
     }
   });
 
+//Blank highlight feature
 
   map.addSource('highlight-feature', {
     type: 'geojson',
@@ -243,6 +258,8 @@ map.on('load', function() {
       features: []
     }
   })
+
+//Layer to complete the highlight
 
   map.addLayer({
     id: 'highlight-line',
@@ -255,10 +272,14 @@ map.on('load', function() {
   });
 })
 
+// Create the popups
+
 var popup = new mapboxgl.Popup({
   closeButton: false,
   closeOnClick: false
 });
+
+//Set popups to appear when hovered
 
 map.on('mousemove', function (e) {
   var features = map.queryRenderedFeatures(e.point, {
@@ -306,7 +327,7 @@ if (features.length > 0) {
 }
 
 else {
-// remove the Popup
+// Remove the Popup when nothing is hovered
 popup.remove();
 map.getCanvas().style.cursor = '';
 map.getSource('highlight-feature').setData({
@@ -316,6 +337,7 @@ map.getSource('highlight-feature').setData({
 }
 })
 
+//Create rudimentary bike routes toggle
 
 var toggleableLayerIds = ['bike routes'];
 
