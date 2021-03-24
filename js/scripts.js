@@ -1,168 +1,15 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm01MDI2IiwiYSI6ImNramJxOGd6NTFiZjYycHFzanY0eTUwZ2sifQ.T4sUXGotNvdmqtESra1iwA';
 
 
-function numberToString(x) {
-  return x.toString();
-}
+//function numberToString(x) {
+//  return x.toString();
+//}
 //Add council member and neighborhood information - via https://council.nyc.gov/districts/
 
-var distMember = (code) => {
-  switch (code) {
-    case 1.0:
-      return {member: 'Margaret S. Chin',
-              neighborhood: 'Battery Park City, Civic Center, Chinatown, Financial District, Little Italy, the Lower East Side, NoHo, SoHo, South Street Seaport, South Village, TriBeCa & Washington Square'};
-    case 2.0:
-      return {member: 'Carlina Rivera',
-              neighborhood: 'East Village, Gramercy, Midtown East'};
-    case 3.0:
-      return {member: 'Corey Johnson',
-              neighborhood: 'West Village, Hells Kitchen, West Midtown'};
-    case 4.0:
-      return {member: 'Keith Powers',
-              neighborhood: 'West Village, Hells Kitchen, West Midtown'};
-    case 5.0:
-      return {member: 'Ben Kallos',
-              neighborhood:'Upper East Side, East Harlem, Roosevelt Island, Midtown East'};
-    case 6.0:
-      return {member: 'Helen Rosenthal',
-    neighborhood:'Upper West Side'};
-    case 7.0:
-      return {member: 'Mark Levine',
-    neighborhood:'Morningside Heights and West Harlem'};
-    case 8.0:
-      return {member: 'Diana Ayala',
-    neighborhood:'East Harlem, Mott Haven, Highbridge, Concourse, Longwood, Port Morris'};
-    case 9.0:
-      return {member: 'Bill Perkins'
-    ,neighborhood:'Central Harlem, Morningside Heights, Upper West Side, East Harlem'};
-    case 10.0:
-      return {member: 'Ydanis Rodriguez',
-    neighborhood:'Washington Heights, Indwood, Marble Hill'};
-    case 11.0:
-      return {member: 'Vacant',
-    neighborhood:'Bedford Park, Kingsbridge, Riverdale, Norwood, Van Cortlandt Village, Wakefield, Woodlawn'};
-    case 12.0:
-      return {member: 'Kevin Riley',
-    neighborhood:'Wakefield, Olinville, Edenwald, Eastchester, Williamsbridge, Baychester, Co-op City'};
-    case 13.0:
-      return {member: 'Mark Gonaj',
-    neighborhood:'Allerton, City Island, Country Club, Edgewater Park, Ferry Point, Locust Point, Morris Park, Pelham Bay, Pelham Gardens, Pelham Parkway, Schuylerville, Silver Beach, Spencer Estates, Throggs Neck, Van Nest, Waterbury LaSalle, Westchester Square, Zerega'};
-    case 14.0:
-      return {member: 'Fernando Cabrera',
-    neighborhood:'Morris Heights, University Heights, Fordham, Kingsbridge'};
-    case 15.0:
-      return {member: 'Vacant',
-    neighborhood:'Bedford Park, Fordham, Mount Hope, Bathgate, Belmont, East Tremont, West Farms, Van Nest, Allerton, Olinville'};
-    case 16.0:
-      return {member: 'Vennessa L. Gibson',
-    neighborhood:'Claremont, Concourse, Concourse Village, Highbridge, Morris Heights, Mount Eden, Morrisania'};
-    case 17.0:
-      return {member: 'Rafael Salamanca Jr.',
-    neighborhood:'Concourse Village, Crotona Park East, East Tremont, Hunts Point, Longwood, Melrose, Morrisania, Port Morris, West Farms'};
-    case 18.0:
-      return {member: 'Ruben Diaz Sr.',
-    neighborhood:'Soundview, Castle Hill, Parkchester, Clason Point, Harding Park'};
-    case 19.0:
-      return {member: 'Paul Vallone'
-    ,neighborhood:'Auburndale, Bay Terrace, Bayside, Beechhurst, College Point, Douglaston, Flushing, Little Neck, Malba, Whitestone'};
-    case 20.0:
-        return {member: 'Peter Koo',
-      neighborhood:'Downtown Flushing, Murray Hill, Queensboro Hill'};
-    case 21.0:
-          return {member: 'Francisco Moya',
-        neighborhood:'East Elmhurst, Elmhurst, Jackson Heights, and Corona in Queens, including Flushing Meadows Corona Park, Lefrak City and LaGuardia Airport'};
-    case 22.0:
-          return {member: 'Costa Constantinides',
-        neighborhood:'Astoria, East Elmhurst, Jackson Heights, Woodside'};
-    case 23.0:
-          return {member: 'Barry Grodenchik',
-        neighborhood:'Bayside Hills, Bellerose, Douglaston, Floral Park, Fresh Meadows, Glen Oaks, Hollis, Hollis Hills, Holliswood, Little Neck, New Hyde Park, Oakland Gardens, Queens Village'};
-    case 24.0:
-          return {member: 'James F. Gennaro',
-        neighborhood:'Kew Gardens Hills, Pomonok, Electchester, Fresh Meadows, Hillcrest, Jamaica Estates, Briarwood, Parkway Village, Jamaica Hills, Jamaica'};
-    case 25.0:
-          return {member: 'Daniel Dromm',
-        neighborhood:'Elmhurst, Jackson Heights'};
-    case 26.0:
-          return {member: 'Jimmy Van Bramer',
-        neighborhood:'Sunnyside, Woodside, Long Island City, Astoria, Dutch Kills'};
-    case 27.0:
-          return {member: 'I. Daneek Miller',
-        neighborhood:'Cambria Heights, Hollis, Jamaica, St. Albans, Queens Village, and Springfield Gardens	'};
-    case 28.0:
-          return {member: 'Adrienne E. Adams',
-        neighborhood:'Jamaica, Richmond Hill, Rochdale Village, South Ozone Park	'};
-    case 29.0:
-          return {member: 'Karen Koslowitz',
-        neighborhood:'Rego Park, Forest Hills, Kew Gardens, Richmond Hill	'};
-    case 30.0:
-          return {member: 'Robert F. Holden',
-        neighborhood:'Glendale, Maspeth, Middle Village, Ridgewood, Woodhaven, Woodside'};
-    case 31.0:
-          return {member: 'Vacant',
-        neighborhood:'Arverne, Brookville, Edgemere, Far Rockaway, Laurelton, Rosedale, Springfield Gardens	'};
-    case 32.0:
-          return {member: 'Eric A. Ulrich',
-        neighborhood:'Belle Harbor, Breezy Point, Broad Channel, Howard Beach, Lindenwood, Neponsit, Ozone Park, Richmond Hill, Rockaway Park, Roxbury, South Ozone Park, West Hamilton Beach, Woodhaven'};
-    case 33.0:
-          return {member: 'Steven T. Levin',
-        neighborhood:'Boerum Hill, Brooklyn Heights, Brooklyn Navy Yard, Downtown Brooklyn, Dumbo, Fulton Ferry, Greenpoint, Vinegar Hill, Williamsburg'};
-    case 34.0:
-          return {member: 'Antonio Reynoso',
-        neighborhood:'Williamsburg, Bushwick, Ridgewood'};
-    case 35.0:
-          return {member: 'Laurie A. Cumbo',
-        neighborhood:'Fort Greene, Clinton Hill, Crown Heights, Prospect Heights, Bedford Stuyvesant'};
-    case 36.0:
-          return {member: 'Robert E. Cornegy Jr.',
-        neighborhood:'Bedford Stuyvesant, Northern Crown Heights'};
-    case 37.0:
-          return {member: 'Darma V. Diaz',
-        neighborhood:'Cypress Hills, Bushwick, City Line, Ocean Hill, Brownsville, East New York'};
-    case 38.0:
-          return {member: 'Carlos Menchaca',
-        neighborhood:'Red Hook, Sunset Park, Greenwood Heights and portions of Windsor Terrace, Dyker Heights, and Boro Park'};
-    case 39.0:
-          return {member: 'Brad Lander',
-        neighborhood:'Cobble Hill, Carroll Gardens, Columbia Waterfront, Gowanus, Park Slope, Windsor Terrace, Borough Park, Kensington'};
-    case 40.0:
-            return {member: 'Mathieu Eugene',
-          neighborhood:'Crown Heights, East Flatbush, Flatbush, Kensington, Midwood, Prospect Park, and Prospect Lefferts Gardens'};
-    case 41.0:
-            return {member: 'Alicka Ampry-Samuel',
-          neighborhood:'Bedford-Stuyvesant, Ocean Hill-Brownsville, East Flatbush, Crown Heights'};
-    case 42.0:
-            return {member: 'Inez Barron',
-          neighborhood:'East New York, New Lots, Remsen Village, Spring Creek, Starrett City'};
-    case 43.0:
-            return {member: 'Justin Brannan',
-          neighborhood:'Bay Ridge, Dyker Heights, Bensonhurst, Bath Beach'};
-    case 44.0:
-            return {member: 'Kalman Yeger',
-          neighborhood:'Bensonhurst, Borough Park, Midwood, Ocean Parkway'};
-    case 45.0:
-          return {member: 'Farah N. Louis',
-        neighborhood:'Flatbush, East Flatbush, Midwood, Marine Park, Flatlands, Kensington'};
-    case 46.0:
-          return {member: 'Alan N. Maisel',
-        neighborhood:'Bergen Beach, Canarsie, Flatlands, Georgetown, Gerritsen Beach, Marine Park, Mill Basin, Mill Island, Sheepshead Bay'};
-    case 47.0:
-          return {member: 'Mark Treyger',
-        neighborhood:'Bensonhurst, Coney Island, Gravesend, Sea Gate'};
-    case 48.0:
-          return {member: 'Chaim M. Deutsch',
-        neighborhood:'Brighton Beach, Manhattan Beach, Sheepshead Bay, Homecrest, Trump Village, Luna Park, Brightwater Towers, Midwood'};
-    case 49.0:
-          return {member: 'Deborah Rose',
-        neighborhood:'Arlington, Clifton, Clove Lakes, Concord, Elm Park, Graniteville, Livingston, Mariners Harbor, New Brighton, Port Richmond, Randall Manor, Rosebank, St. George, Snug Harbor, Silver Lake, Stapleton, Sunnyside, West Brighton and Tompkinsville'};
-    case 50.0:
-          return {member: 'Steven Matteo',
-        neighborhood:'Arrochar, Bloomfield, Bulls Head, Castleton Corners, Chelsea, Concord, Dongan Hills, Egbertville, Emerson Hill, Fort Wadsworth, Graniteville, Grant City, Grasmere, Heartland Village, Isle of Meadows, Lighthouse Hill, Manor Heights, Meiers Corners, Midland Beach, New Dorp, New Springville, Oakwood, Ocean Breeze, Old Town, Pralls Island, Richmondtown, Rosebank, Shore Acres, South Beach, Todt Hill, Travis, Westerleigh, and Willowbrook'};
-    case 51.0:
-          return {member: 'Joseph C. Borelli',
-        neighborhood:'Annadale, Arden Heights, Bay Terrace, Charleston, Eltingville, Great Kills, Greenridge, Heartland Village, Huguenot, New Springville, Pleasant Plains, Prince’s Bay, Richmond Valley, Rossville, Tottenville, Woodrow'};
-    }
-    ;}
+var bounds = [
+[-74.5, 40.3], // Southwest coordinates
+[-73.5, 40.95] // Northeast coordinates
+];
 
 //Setting up our map via mapboxgl
 
@@ -170,7 +17,8 @@ var map = new mapboxgl.Map({
   container: 'map-container',
   style: 'mapbox://styles/mapbox/light-v10',
   center: [-73.95, 40.70],
-  zoom: 10.0
+  zoom: 10.0,
+  maxBounds: bounds
 });
 
 //Kill scroll zoom
@@ -182,37 +30,36 @@ map.scrollZoom.disable();
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
+
 map.on('load', function() {
 
 //Adding our bike grades file (created via qgis)
 
-  map.addSource('bike-grades', {
+map.addSource('crashes', {
     type: 'geojson',
-    data: 'data/bike-grades.geojson'
+    data: 'data/crashes.geojson'
   });
 
-//Add bike index layer and set colors based on index
-
   map.addLayer({
-    'id': 'bike index',
+    'id': 'crashes',
     'type': 'fill',
-    'source': 'bike-grades',
+    'source': 'crashes',
     'layout': {},
     'paint': {
       'fill-color':{
       property: 'index',
       stops: [
-        [0, '#B32911'],
-        [4, '#B32911'],
-        [5, '#DB842C'],
-        [9, '#DB842C'],
-        [10,'#D6C815'],
-        [19,'#D6C815'],
-        [20,'#85CC8D'],
-        [29,'#85CC8D'],
-        [30,'#517CAD'],
-        [40,'#517CAD']]},
-      'fill-opacity': 0.6
+        [0, '#517CAD'],
+        [1.99, '#517CAD'],
+        [2, '#85CC8D'],
+        [3.99, '#85CC8D'],
+        [4,'#D6C815'],
+        [5.99,'#D6C815'],
+        [6,'#DB842C'],
+        [7.99,'#DB842C'],
+        [8,'#B32911'],
+        [12,'#B32911']]},
+      'fill-opacity': 0.3
     }
   })
 
@@ -221,7 +68,7 @@ map.on('load', function() {
   map.addLayer({
     'id': 'dist-outlines',
     'type': 'line',
-    'source': 'bike-grades',
+    'source': 'crashes',
     'layout': {},
     'paint': {
       'line-color': '#ffffff',
@@ -229,101 +76,140 @@ map.on('load', function() {
     }
   });
 
-//Add bicycle routes data from NYC DOT
 
-  map.addSource('bike-routes', {
+  map.addSource('spending', {
     type: 'geojson',
-    data: 'data/bicycle-routes.geojson'
+    data: 'data/dot_cap.geojson'
   });
 
-//Add bike route layer
+//Add bike index layer and set colors based on index
 
-  map.addLayer({
-    'id': 'bike routes',
-    'type': 'line',
-    'source': 'bike-routes',
-    'layout': {},
-    'paint': {
-      'line-color': '#039252',
-      'line-width': 1.0
-    }
-  });
+
+map.addLayer({
+    'id': 'capital',
+    type: 'circle',
+        source: 'spending',
+        paint: {
+          'circle-radius': [
+            'interpolate',
+            ['linear'],
+            ['number', ['get', 'cumm_tot']],
+            0,8,
+            4,12,
+            20,16,
+            50,20,
+            100,22,
+            200,26],
+            'circle-color': [
+              'interpolate',
+              ['linear'],
+              ['number', ['get', 'cumm_tot']],
+              0,
+              '#8fe3bd',
+              100,
+              '#039252'],
+              'circle-opacity': 0.8
+            }
+      })
+
+map.addLayer({
+      'id': 'label-style',
+      'type': 'symbol',
+      'source': 'spending',
+      'layout': {
+      'text-field': ['concat','$',['get','cumm_tot'],'M'],
+           'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_tot']],
+           0,6,
+           4,7,
+           20,8,
+           50,9,
+           100,10,
+           200,12]
+          },
+      'paint': {
+      'text-color': '#069'}
+      });
+
+      map.setFilter(['capital'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['label-style'], ['==', 'fy_num', 2021]);
+
+      document.getElementById('slider').addEventListener('input', function(e) {
+        var fy = parseInt(e.target.value);
+
+
+        map.setFilter('capital', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('label-style', ['==', ['get', 'fy_num'], fy]);
+
+        document.getElementById('fiscal-year').innerText = fy;
+      })
 
 //Blank highlight feature
-
-  map.addSource('highlight-feature', {
-    type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: []
-    }
-  })
+map.addSource('highlight-feature', {
+  type: 'geojson',
+  data: {
+    type: 'FeatureCollection',
+    features: []
+  }
+})
 
 //Layer to complete the highlight
 
-  map.addLayer({
-    id: 'highlight-line',
-    type: 'line',
-    source: 'highlight-feature',
-    paint: {
-      'line-width': 2,
-      'line-color': 'white',
-    }
-  });
+map.addLayer({
+  id: 'highlight-line',
+  type: 'line',
+  source: 'highlight-feature',
+  paint: {
+    'line-width': 2,
+    'line-color': 'white',
+  }
+});
+
 })
 
 // Create the popups
 
 var popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false
+  closeButton: true,
+  closeOnClick: true
 });
 
 //Set popups to appear when hovered
 
-map.on('mousemove', function (e) {
+map.on('click', function (e) {
   var features = map.queryRenderedFeatures(e.point, {
-      layers: ['bike index', 'bike routes'],
+      layers: ['capital','crashes'],
   });
 
 if (features.length > 0) {
-  var hoveredFeature = features[0]
-  if (hoveredFeature.layer.id === 'bike index') {
-  var dist = hoveredFeature.properties.coun_dist
-  var rep = distMember(parseInt(hoveredFeature.properties.coun_dist)).member
-  var nabe = distMember(parseInt(hoveredFeature.properties.coun_dist)).neighborhood
-  var index = numberToString(hoveredFeature.properties.index)
+  var clickedFeature = features[0]
+  if (clickedFeature.layer.id === 'capital') {
+  var dist = clickedFeature.properties.c_dist
+  var index = numberToString(clickedFeature.properties.cumm_tot)
 
   var popupContent = `
     <div class="popup">
       <b>Council District ${dist}</b><br/>
-      ${rep} <br/>
-      ${nabe} <br/>
-      Bike Index: ${index}
+      Spending: ${index}
     </div>`
 
     popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);}
 
     else {
-    var street = hoveredFeature.properties.street
-    var fromstreet = hoveredFeature.properties.fromstreet
-    var tostreet = hoveredFeature.properties.tostreet
-    var lanetype = hoveredFeature.properties.tf_facilit
+    var index = numberToString(clickededFeature.properties.index)
+
 
     var popupContent = `
       <div class="popup">
-        <b> Street Name: ${street} </b><br/>
-        From: ${fromstreet} <br/>
-        To: ${tostreet} <br/>
-        Lane Type: ${lanetype}
+        <b> Street Name: ${index} </b><br/>
       </div>`
 
       popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);
   }
 
-    map.getSource('highlight-feature').setData(hoveredFeature.geometry);
+    map.getSource('highlight-feature').setData(clickedFeature.geometry);
 
-    map.getCanvas().style.cursor = 'pointer';
 }
 
 else {
@@ -335,36 +221,58 @@ map.getSource('highlight-feature').setData({
       "features": []
   });
 }
-})
+});
+
+map.on('mouseenter', 'crashes', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'crashes', function () {
+map.getCanvas().style.cursor = '';
+});
+
+
+
+
+map.on('mouseenter', 'capital', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'capital', function () {
+map.getCanvas().style.cursor = '';
+});
+
 
 //Create rudimentary bike routes toggle
 
-var toggleableLayerIds = ['bike routes'];
+//var toggleableLayerIds = ['bike routes'];
 
-for (var i = 0; i < toggleableLayerIds.length; i++) {
-  var id = toggleableLayerIds[i];
+//for (var i = 0; i < toggleableLayerIds.length; i++) {
+//  var id = toggleableLayerIds[i];
 
-  var link = document.createElement('a');
-  link.href = '#';
-  link.className = 'active';
-  link.textContent = id;
+//  var link = document.createElement('a');
+//  link.href = '#';
+//  link.className = 'active';
+//  link.textContent = id;
 
-  link.onclick = function(e) {
-    var clickedLayer = this.textContent;
-    e.preventDefault();
-    e.stopPropagation();
+//  link.onclick = function(e) {
+//    var clickedLayer = this.textContent;
+//    e.preventDefault();
+//    e.stopPropagation();
 
-    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+//    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
 
-    if (visibility === 'visible') {
-      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-      this.className = '';
-    } else {
-      this.className = 'active';
-      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-    }
-  };
+//    if (visibility === 'visible') {
+//      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+//      this.className = '';
+//    } else {
+//      this.className = 'active';
+//      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+//    }
+//  };
 
-  var layers = document.getElementById('menu');
-  layers.appendChild(link);
-}
+//  var layers = document.getElementById('menu');
+//  layers.appendChild(link);
+//}

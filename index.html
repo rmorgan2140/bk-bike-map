@@ -6,11 +6,18 @@
 
   <meta charset="utf-8">
 
-  <title>NYC Bike Map</title>
+  <title>NYC Street Investments</title>
+
+  <!-- Mapbox styles -->
 
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
 
+  <!-- local styles -->
+
   <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+
+  <script src="https://kit.fontawesome.com/223e95945f.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -20,29 +27,36 @@
 
 <div id = 'text-container'>
 
-  <h1 id = 'title' > How Bike Friendly Is Your City Council District? </h1>
+  <h1 id="title">Budgeting for Safer Streets</h1>
 
-  <p id = 'text'> The state of bicycle infrastructure varies widely across New York City.
-    This simple index is designed to help you understand how well your neighborhood - and your
-    elected officials are doing - to help protect cyclists and promote low-carbon travel. </br> </br>
-    The index takes into account only traditional and protected bikeways on city streets, comparing the
-    mileage of these elements with the total road network in the Council District. Protected bikeways
-    are weighted more heavily than traditional lanes in making this calculation.
-    The City also installs shared streets or "sharrows" in  some areas, but these features
-    don't provide substantial protection from motor vehicles. </br> </br>
-    In the future, more information might be considered to improve this index and develop
-    actionable planning tools for neighborhoods. Additional data may include high-crash intersections
-    corridors, existing and planned street treatments such as daylighting at intersections, and
-    traffic counts with an eye towards high truck traffic areas.
+  <h2 > Where is NYC Making Capital Investments? </h2>
+
+  <p id = 'text'> The City's Fiscal Year 2021 Adopted Budget sheds light on where the money is going.
+    As NYC grapples with an impending showdown between a surging number of drivers and newly minted
+    cyclists and pedestrians, measuring spending to improve our streets matters more than ever.
   </p>
+
+
+  <h2>View Capital Investments Over Time</h2>
+
+  <p id = 'slider-direction'> Drag the slider to see cummulative DOT capital spending on street improvements in each
+    Community District over the next five fiscal years. </p>
+
+  <div class='session' id='sliderbar'>
+    <h3>Fiscal Year: <label id='fiscal-year'>2021</label></h3>
+    <input id='slider' class='row' type='range' min='2021' max='2025' step='1' value='2021' />
+  </div>
 
 <div class = "legend">
 
-<div id = "legendtitle">
+<h2 id = "legendtitle">
 
-    Bicycle Network Grades
+    Serious Crashes in 2020
 
-</div>
+</h2>
+
+<p>Is DOT funding being allocated to the areas with the most crashes that caused
+  injuries or fatalities? This layer shows an index of serious crashes aggregated by Community District.
 
 <div class="color-code">
 
@@ -55,11 +69,11 @@
 </div>
 
 <div class="color-labels-container">
-  <div class="color-label" id="l1">A - Widespread - Cycling is a safe option for most trips</div> </br>
-  <div class="color-label" id="l2">B - Adequate - Cycling is safe along many corridors </div> </br>
-  <div class="color-label" id="l3">C - Limited - Cycling is safe on some streets </div> </br>
-  <div class="color-label" id="l4">D - Sparse - Cycling is risky on most streets </div> </br>
-  <div class="color-label" id="l5">F - Nonexistent - Cycling is in traffic and very risky</div>
+  <div class="color-label" id="l1">Crash Severity Index < 2 </div> </br>
+  <div class="color-label" id="l2">Crash Severity Index 2-4 </div> </br>
+  <div class="color-label" id="l3">Crash Severity Index 4-6</div> </br>
+  <div class="color-label" id="l4">Crash Severity Index 6-8 </div> </br>
+  <div class="color-label" id="l5">Crash Severity Index > 8 </div>
 </div>
 
   </div>
@@ -68,7 +82,7 @@
 
   <div id = "filter-instructions">
 
-    Toggle to see the City's bicycle network; hover over a street segment to learn more!
+    Toggle by victim type - car ped driver
 
   </div>
 
@@ -94,6 +108,9 @@
 <div id = "map-container">  </div>
 
 </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
   <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
 
