@@ -31,11 +31,10 @@
 
   <h2 > Where is NYC Making Capital Investments? </h2>
 
-  <p id = 'text'> The City's Fiscal Year 2021 Adopted Budget sheds light on where the money is going.
+  <p id = 'text'> The City's <a class='link' href=https://www1.nyc.gov/assets/omb/downloads/pdf/cb6-20.pdf>Fiscal Year 2021 Adopted Budget</a> sheds light on where the money is going.
     As NYC grapples with an impending showdown between a surging number of drivers and newly minted
     cyclists and pedestrians, measuring spending to improve our streets matters more than ever.
   </p>
-
 
   <h2>View Capital Investments Over Time</h2>
 
@@ -43,9 +42,25 @@
     Community District over the next five fiscal years. </p>
 
   <div class='session' id='sliderbar'>
-    <h3>Fiscal Year: <label id='fiscal-year'>2021</label></h3>
+    <h3>Fiscal Year<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+  <span class="tooltiptext">July 1 - June 30</span>
+</div> <label id='fiscal-year'>2021</label></h3>
     <input id='slider' class='row' type='range' min='2021' max='2025' step='1' value='2021' />
   </div>
+
+  <!-- Trigger/Open The Modal -->
+<button id="myBtn"><i class="fas fa-traffic-light"></i> Methodology</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
 
 <div class = "legend">
 
@@ -78,21 +93,6 @@
 
   </div>
 
-<div class = "filter-container">
-
-  <div id = "filter-instructions">
-
-    Toggle by victim type - car ped driver
-
-  </div>
-
-  <div class = "filters">
-
-    <nav id="menu"></nav>
-
-  </div>
-
-</div>
 
 <div id = sources>
 
