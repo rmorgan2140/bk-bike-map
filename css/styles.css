@@ -264,3 +264,20 @@ color: #404040;
 #qmark {
   font-size: 0.2rem;
 }
+
+.btn-group {
+  padding: 10px;
+}
+
+button {
+  background-color: #ffffff;
+  outline-color: #069;
+}
+
+.layerselectorcontainer{
+  z-index: 2;
+position:absolute;
+padding-top: 10px;
+padding-left: 430px;
+
+}

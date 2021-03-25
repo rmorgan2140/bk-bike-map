@@ -112,6 +112,90 @@ map.addLayer({
             }
       })
 
+
+      map.addLayer({
+          'id': 'ped-bike',
+          type: 'circle',
+              source: 'spending',
+              paint: {
+                'circle-radius': [
+                  'interpolate',
+                  ['linear'],
+                  ['number', ['get', 'cumm_bp']],
+                  0,8,
+                  4,12,
+                  20,16,
+                  50,20,
+                  100,22,
+                  200,26],
+                  'circle-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['number', ['get', 'cumm_bp']],
+                    0,
+                    '#8fe3bd',
+                    100,
+                    '#039252'],
+                    'circle-opacity': 0.8
+                  }
+            })
+
+
+            map.addLayer({
+                'id': 'bus',
+                type: 'circle',
+                    source: 'spending',
+                    paint: {
+                      'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['number', ['get', 'cumm_bus']],
+                        0,8,
+                        4,12,
+                        20,16,
+                        50,20,
+                        100,22,
+                        200,26],
+                        'circle-color': [
+                          'interpolate',
+                          ['linear'],
+                          ['number', ['get', 'cumm_bus']],
+                          0,
+                          '#8fe3bd',
+                          100,
+                          '#039252'],
+                          'circle-opacity': 0.8
+                        }
+                  })
+
+
+                  map.addLayer({
+                      'id': 'general',
+                      type: 'circle',
+                          source: 'spending',
+                          paint: {
+                            'circle-radius': [
+                              'interpolate',
+                              ['linear'],
+                              ['number', ['get', 'cumm_gen']],
+                              0,8,
+                              4,12,
+                              20,16,
+                              50,20,
+                              100,22,
+                              200,26],
+                              'circle-color': [
+                                'interpolate',
+                                ['linear'],
+                                ['number', ['get', 'cumm_gen']],
+                                0,
+                                '#8fe3bd',
+                                100,
+                                '#039252'],
+                                'circle-opacity': 0.8
+                              }
+                        })
+
 map.addLayer({
       'id': 'label-style',
       'type': 'symbol',
@@ -130,9 +214,77 @@ map.addLayer({
       'text-color': '#069'}
       });
 
+      map.addLayer({
+            'id': 'label-style-bp',
+            'type': 'symbol',
+            'source': 'spending',
+            'layout': {
+            'text-field': ['concat','$',['get','cumm_bp'],'M'],
+                 'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_bp']],
+                 0,6,
+                 4,7,
+                 20,8,
+                 50,9,
+                 100,10,
+                 200,12]
+                },
+            'paint': {
+            'text-color': '#069'}
+            });
+
+            map.addLayer({
+                  'id': 'label-style-bus',
+                  'type': 'symbol',
+                  'source': 'spending',
+                  'layout': {
+                  'text-field': ['concat','$',['get','cumm_bus'],'M'],
+                       'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_bus']],
+                       0,6,
+                       4,7,
+                       20,8,
+                       50,9,
+                       100,10,
+                       200,12]
+                      },
+                  'paint': {
+                  'text-color': '#069'}
+                  });
+
+                  map.addLayer({
+                        'id': 'label-style-gen',
+                        'type': 'symbol',
+                        'source': 'spending',
+                        'layout': {
+                        'text-field': ['concat','$',['get','cumm_gen'],'M'],
+                             'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_gen']],
+                             0,6,
+                             4,7,
+                             20,8,
+                             50,9,
+                             100,10,
+                             200,12]
+                            },
+                        'paint': {
+                        'text-color': '#069'}
+                        });
+
+
+
       map.setFilter(['capital'], ['==', 'fy_num', 2021]);
 
       map.setFilter(['label-style'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['ped-bike'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['label-style-bp'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['bus'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['label-style-bus'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['general'], ['==', 'fy_num', 2021]);
+
+      map.setFilter(['label-style-gen'], ['==', 'fy_num', 2021]);
 
       document.getElementById('slider').addEventListener('input', function(e) {
         var fy = parseInt(e.target.value);
@@ -142,8 +294,78 @@ map.addLayer({
 
         map.setFilter('label-style', ['==', ['get', 'fy_num'], fy]);
 
+        map.setFilter('ped-bike', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('label-style-bp', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('bus', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('label-style-bus', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('general', ['==', ['get', 'fy_num'], fy]);
+
+        map.setFilter('label-style-gen', ['==', ['get', 'fy_num'], fy]);
+
         document.getElementById('fiscal-year').innerText = fy;
       })
+
+
+      map.setLayoutProperty('capital', 'visibility', 'visible');
+      map.setLayoutProperty('label-style', 'visibility', 'visible');
+      map.setLayoutProperty('ped-bike', 'visibility', 'none');
+      map.setLayoutProperty('label-style-bp', 'visibility', 'none');
+      map.setLayoutProperty('bus', 'visibility', 'none');
+      map.setLayoutProperty('label-style-bus', 'visibility', 'none');
+      map.setLayoutProperty('general', 'visibility', 'none');
+      map.setLayoutProperty('label-style-gen', 'visibility', 'none');
+
+      $('#all').on('click', function() {
+
+        map.setLayoutProperty('capital', 'visibility', 'visible');
+        map.setLayoutProperty('label-style', 'visibility', 'visible');
+        map.setLayoutProperty('ped-bike', 'visibility', 'none');
+        map.setLayoutProperty('label-style-bp', 'visibility', 'none');
+        map.setLayoutProperty('bus', 'visibility', 'none');
+        map.setLayoutProperty('label-style-bus', 'visibility', 'none');
+        map.setLayoutProperty('general', 'visibility', 'none');
+        map.setLayoutProperty('label-style-gen', 'visibility', 'none');
+})
+
+$('#bp').on('click', function() {
+
+  map.setLayoutProperty('capital', 'visibility', 'none');
+  map.setLayoutProperty('label-style', 'visibility', 'none');
+  map.setLayoutProperty('ped-bike', 'visibility', 'visible');
+  map.setLayoutProperty('label-style-bp', 'visibility', 'visible');
+  map.setLayoutProperty('bus', 'visibility', 'none');
+  map.setLayoutProperty('label-style-bus', 'visibility', 'none');
+  map.setLayoutProperty('general', 'visibility', 'none');
+  map.setLayoutProperty('label-style-gen', 'visibility', 'none');
+})
+
+$('#bus').on('click', function() {
+
+  map.setLayoutProperty('capital', 'visibility', 'none');
+  map.setLayoutProperty('label-style', 'visibility', 'none');
+  map.setLayoutProperty('ped-bike', 'visibility', 'none');
+  map.setLayoutProperty('label-style-bp', 'visibility', 'none');
+  map.setLayoutProperty('bus', 'visibility', 'visible');
+  map.setLayoutProperty('label-style-bus', 'visibility', 'visible');
+  map.setLayoutProperty('general', 'visibility', 'none');
+  map.setLayoutProperty('label-style-gen', 'visibility', 'none');
+})
+
+$('#gen').on('click', function() {
+
+  map.setLayoutProperty('capital', 'visibility', 'none');
+  map.setLayoutProperty('label-style', 'visibility', 'none');
+  map.setLayoutProperty('ped-bike', 'visibility', 'none');
+  map.setLayoutProperty('label-style-bp', 'visibility', 'none');
+  map.setLayoutProperty('bus', 'visibility', 'none');
+  map.setLayoutProperty('label-style-bus', 'visibility', 'none');
+  map.setLayoutProperty('general', 'visibility', 'visible');
+  map.setLayoutProperty('label-style-gen', 'visibility', 'visible');
+})
 
 //Blank highlight feature
 map.addSource('highlight-feature', {
@@ -167,7 +389,6 @@ map.addLayer({
 });
 
 })
-
 // Create the popups
 
 var popup = new mapboxgl.Popup({
