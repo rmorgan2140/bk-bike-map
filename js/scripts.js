@@ -1,12 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm01MDI2IiwiYSI6ImNramJxOGd6NTFiZjYycHFzanY0eTUwZ2sifQ.T4sUXGotNvdmqtESra1iwA';
 
 
-
-
-//function numberToString(x) {
-//  return x.toString();
-//}
-//Add council member and neighborhood information - via https://council.nyc.gov/districts/
+//Limit how far users can pan
 
 var bounds = [
 [-74.5, 40.4], // Southwest coordinates
@@ -35,15 +30,17 @@ map.addControl(nav, 'top-right');
 
 map.on('load', function() {
 
-//Adding our bike grades file (created via qgis)
-
-
-//Adding our bike grades file (created via qgis)
+//Add the data for crashes
 
 map.addSource('crashes', {
     type: 'geojson',
     data: 'data/crashes_cd.geojson'
   });
+
+
+//Create the crashes layer
+
+//This is a fill layer with stops based on our index - monthly avg crashes + annual Fatalities
 
   map.addLayer({
     'id': 'crashes',
@@ -68,7 +65,7 @@ map.addSource('crashes', {
     }
   })
 
-  // Add outlines
+  // Add outlines for the community districts
 
   map.addLayer({
     'id': 'dist-outlines',
@@ -103,14 +100,16 @@ map.addSource('crashes', {
     }
   });
 
+//Add our capital projects data
 
   map.addSource('spending', {
     type: 'geojson',
     data: 'data/dot_cap.geojson'
   });
 
-//Add bike index layer and set colors based on index
+//Add all projects layer and set colors based spending by community district
 
+//Circle markers will grow as cummulative spending grows
 
 map.addLayer({
     'id': 'capital',
@@ -139,6 +138,7 @@ map.addLayer({
             },
       })
 
+//Add our pedestrian and bike project ONLY layer
 
       map.addLayer({
           'id': 'ped-bike',
@@ -167,6 +167,7 @@ map.addLayer({
                   }
             })
 
+//Repeat for bus projects
 
             map.addLayer({
                 'id': 'bus',
@@ -195,6 +196,7 @@ map.addLayer({
                         }
                   })
 
+// Repeat again for general street recon
 
                   map.addLayer({
                       'id': 'general',
@@ -222,6 +224,9 @@ map.addLayer({
                                 'circle-opacity': 0.9
                               }
                         })
+//Create a symbol layer with the spending amounts
+//Text will grow as spending grows
+//This layer is all projects
 
 map.addLayer({
       'id': 'label-style',
@@ -243,6 +248,8 @@ map.addLayer({
     }
       });
 
+//Repeat for bike projects
+
       map.addLayer({
             'id': 'label-style-bp',
             'type': 'symbol',
@@ -261,6 +268,8 @@ map.addLayer({
             'paint': {
             'text-color': '#303030'}
             });
+
+// Repeat again for bus
 
             map.addLayer({
                   'id': 'label-style-bus',
@@ -281,6 +290,8 @@ map.addLayer({
                   'text-color': '#303030'}
                   });
 
+//Repeat again for street recon
+
                   map.addLayer({
                         'id': 'label-style-gen',
                         'type': 'symbol',
@@ -300,7 +311,7 @@ map.addLayer({
                         'text-color': '#303030'}
                         });
 
-
+//Set the initial filter positions to start at FY21
 
       map.setFilter(['capital'], ['==', 'fy_num', 2021]);
 
@@ -318,9 +329,12 @@ map.addLayer({
 
       map.setFilter(['label-style-gen'], ['==', 'fy_num', 2021]);
 
+//Add a listener for the slider
+
       document.getElementById('slider').addEventListener('input', function(e) {
         var fy = parseInt(e.target.value);
 
+//Filter by fiscal year as users interact with the slider
 
         map.setFilter('capital', ['==', ['get', 'fy_num'], fy]);
 
@@ -338,10 +352,12 @@ map.addLayer({
 
         map.setFilter('label-style-gen', ['==', ['get', 'fy_num'], fy]);
 
+//Adjust the year in the slider label
+
         document.getElementById('fiscal-year').innerText = fy;
       })
 
-
+//Set initial layer visibility to only show all projects
 
       map.setLayoutProperty('capital', 'visibility', 'visible');
       map.setLayoutProperty('label-style', 'visibility', 'visible');
@@ -352,8 +368,14 @@ map.addLayer({
       map.setLayoutProperty('general', 'visibility', 'none');
       map.setLayoutProperty('label-style-gen', 'visibility', 'none');
 
+
+//Add event listeners for each radio button
+
+//First one is for all projects
+
       $('#all').on('click', function() {
 
+//Adjust visibility based on click
         map.setLayoutProperty('capital', 'visibility', 'visible');
         map.setLayoutProperty('label-style', 'visibility', 'visible');
         map.setLayoutProperty('ped-bike', 'visibility', 'none');
@@ -364,6 +386,7 @@ map.addLayer({
         map.setLayoutProperty('label-style-gen', 'visibility', 'none');
 })
 
+//For bike & ped projects
 
 $('#bp').on('click', function() {
 
@@ -377,6 +400,8 @@ $('#bp').on('click', function() {
   map.setLayoutProperty('label-style-gen', 'visibility', 'none');
 })
 
+//For bus
+
 $('#bus').on('click', function() {
 
   map.setLayoutProperty('capital', 'visibility', 'none');
@@ -388,6 +413,9 @@ $('#bus').on('click', function() {
   map.setLayoutProperty('general', 'visibility', 'none');
   map.setLayoutProperty('label-style-gen', 'visibility', 'none');
 })
+
+
+// For street recon
 
 $('#gen').on('click', function() {
 
@@ -405,7 +433,7 @@ $('#gen').on('click', function() {
 })
 
 
-// Create the popups
+// Create mapbox popups to be used for the crashes layer
 
 var popup = new mapboxgl.Popup({
   closeButton: false,
@@ -421,6 +449,8 @@ map.on('mousemove', function (e) {
       layers: ['crashes'],
   });
 
+//Get data for the popups from our crashes layer
+
 if (features.length > 0) {
   var hoveredFeature = features[0]
   var boro = hoveredFeature.properties.borough
@@ -434,12 +464,15 @@ if (features.length > 0) {
       <b>${boro} CD ${numb}</b><br/>
       <a>${nabe}</a><br/>
       <a>Crash Index: ${index}</a><br/>
-      <a>Annual Injuries: ${inj}</a><br/>
-      <a>Annual Fatalities: ${fat}</a>
+      <a>2020 Injuries: ${inj}</a><br/>
+      <a>2020 Fatalities: ${fat}</a>
     </div>`
+
+//Set popup location based on feature geometry
 
     popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);
 
+//Highlight feature setup
 
     map.getSource('highlight-feature').setData(hoveredFeature.geometry);
 
@@ -456,29 +489,23 @@ map.getSource('highlight-feature').setData({
 }
 });
 
-map.on('mouseenter', 'crashes', function () {
-map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'crashes', function () {
-map.getCanvas().style.cursor = '';
-});
+//setup the modals
 
 var modal = document.getElementsByClassName('modal');
 
-// Get the button that opens the modal
+// get the button that opens the modal
 var btn = document.getElementsByClassName("btn-modal");
 
 
-// Get the <span> element that closes the modal
+// get the <span> element that closes the modal
 var span = document.getElementsByClassName("close");
 
-// When the user clicks the button, open the modal
+// When the user clicks the button, open the first modal
 btn[0].onclick = function() {
     modal[0].style.display = "block";
 }
 
+// opening the second modal on click
 btn[1].onclick = function() {
     modal[1].style.display = "block";
 }
@@ -492,11 +519,14 @@ span[1].onclick = function() {
 }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modal[0]) {
+        modal[0].style.display = "none";
     }
 }
 
+//note - for some reason this does not work for second modal... need to use close button
+
+//set all projects radio to be clicked on document load
 
 $(document).ready(function () {
     $('#all').trigger('click');

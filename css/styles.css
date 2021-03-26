@@ -58,6 +58,8 @@ p {
   width: 100%;
 }
 
+/* format all links with DOT blue color scheme */
+
 .link {
   color:#069;
   text-decoration: none;
@@ -79,14 +81,8 @@ p {
   text-align: center;
 }
 
-.color-code {
-  padding: 10px;
-}
 
-.colors {
-  width: 40px;
-  height: 15px;
-}
+/* colors for legend bar */
 
 #c1 {
   background-color: #517CAD;
@@ -108,6 +104,8 @@ p {
   background-color: #B32911;
 }
 
+/* format the container for all of our filters/radio buttons */
+
 .filter-container {
   position: relative;
   float: left;
@@ -125,7 +123,6 @@ p {
   font-size: 1.4rem;
   color: #069;
 }
-
 
 
 #sources {
@@ -149,7 +146,7 @@ p {
   font-size: 0.8rem;
 }
 
-/* The Modal (background) */
+/*  modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -163,17 +160,17 @@ p {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
+/* modal box */
 .modal-content {
   background-color: #fefefe;
   margin: 5% auto;
   padding: 10px;
   border: 1px solid #888;
   width: 60%;
-  overflow-y: scroll;/* Could be more or less, depending on screen size */
+  overflow-y: scroll;
 }
 
-/* The Close Button */
+/* modal close button */
 .close {
   color: #303030;
   float: right;
@@ -188,13 +185,13 @@ p {
   cursor: pointer;
 }
 
-/* Tooltip container */
+/* tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
 }
 
-/* Tooltip text */
+/* tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 80px;
@@ -222,6 +219,8 @@ p {
   visibility: visible;
   opacity: 1;
 }
+
+/* tooltip text for project types */
 
 .tooltip .pt-text{
   visibility: hidden;
@@ -253,6 +252,7 @@ p {
   opacity: 1;
 }
 
+
 #pt-desc {
   margin: 4px 8px 4px 8px;
 }
@@ -260,6 +260,44 @@ p {
 #qmark {
   font-size: 0.2rem;
 }
+
+/* tooltip text for crash index */
+
+.tooltip .id-text{
+  visibility: hidden;
+  width: 180px;
+  height: 40px;
+  background-color: #303030;
+  color: #fff;
+  font-size: 0.6rem;
+  text-align: left;
+  margin: 5px;
+  padding: 5px 0;
+  border-radius: 8px;
+  opacity: 0.8;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 90%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .id-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+#id-desc {
+  margin: 4px 8px 4px 8px;
+}
+
+/* more formatting for radio buttons group */
 
 
 .layerselectorcontainer{
@@ -286,6 +324,44 @@ label {
   font-size: 0.9rem;
   font-family: Helvetica, sans-serif;
 }
+
+
+#pt-filter-label {
+  margin: 0px;
+}
+
+/* container for the legend pieces */
+
+
+.legendcontainer{
+  width: 100%;
+  height: 35px;
+}
+
+/* legend bar */
+
+.column2 {
+  float: left;
+  width: 18%;
+  height: 20px;
+}
+
+/* legend scale/key */
+
+.column3 {
+  float: left;
+  width: 18%;
+  height: 12px;
+}
+
+.keynum {
+  font-size: 0.8rem;
+  margin: 4px;
+}
+
+
+/* modal buttons */
+
 
 .btn-container {
   padding-top: 20px;
@@ -314,6 +390,8 @@ label {
   background-color: #d3d3d3
 }
 
+/* formatting for content in the modal */
+
 
 #bkgd {
   width: 100%;
@@ -334,38 +412,19 @@ label {
   position: relative;
   float: left;
   padding-left: 10px;
+  margin-top: 60px;
 }
 
 .fig {
   position: relative;
-  max-width: 80%;
-  padding-left: 20px;
+  max-width: 85%;
+  padding-left: 40px;
+  padding-bottom: 20px;
   margin: auto;
 }
 
-#pt-filter-label {
-  margin: 0px;
-}
-
-.legendcontainer{
-  width: 100%;
-  height: 35px;
-}
-
-
-.column2 {
+#other {
+  position: relative;
   float: left;
-  width: 18%;
-  height: 20px;
-}
-
-.column3 {
-  float: left;
-  width: 18%;
-  height: 12px;
-}
-
-.keynum {
-  font-size: 0.8rem;
-  margin: 4px;
+  width = 100%;
 }
