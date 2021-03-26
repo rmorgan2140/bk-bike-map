@@ -553,6 +553,6 @@ $(document).ready(function() {
   $('#all').trigger('click');
 });
 
-//set all links to open in new tab
+//set links to open in a new tab
 
 $("a").attr("target", "_blank");
