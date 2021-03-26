@@ -1,13 +1,15 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm01MDI2IiwiYSI6ImNramJxOGd6NTFiZjYycHFzanY0eTUwZ2sifQ.T4sUXGotNvdmqtESra1iwA';
 
 
+
+
 //function numberToString(x) {
 //  return x.toString();
 //}
 //Add council member and neighborhood information - via https://council.nyc.gov/districts/
 
 var bounds = [
-[-74.5, 40.3], // Southwest coordinates
+[-74.5, 40.4], // Southwest coordinates
 [-73.5, 40.95] // Northeast coordinates
 ];
 
@@ -35,9 +37,12 @@ map.on('load', function() {
 
 //Adding our bike grades file (created via qgis)
 
+
+//Adding our bike grades file (created via qgis)
+
 map.addSource('crashes', {
     type: 'geojson',
-    data: 'data/crashes.geojson'
+    data: 'data/crashes_cd.geojson'
   });
 
   map.addLayer({
@@ -50,16 +55,16 @@ map.addSource('crashes', {
       property: 'index',
       stops: [
         [0, '#517CAD'],
-        [1.99, '#517CAD'],
-        [2, '#85CC8D'],
-        [3.99, '#85CC8D'],
-        [4,'#D6C815'],
-        [5.99,'#D6C815'],
-        [6,'#DB842C'],
-        [7.99,'#DB842C'],
-        [8,'#B32911'],
-        [12,'#B32911']]},
-      'fill-opacity': 0.3
+        [11.99, '#517CAD'],
+        [22, '#85CC8D'],
+        [23.99, '#85CC8D'],
+        [44,'#D6C815'],
+        [64.99,'#D6C815'],
+        [65,'#DB842C'],
+        [94.99,'#DB842C'],
+        [95,'#B32911'],
+        [150,'#B32911']]},
+      'fill-opacity':['interpolate',['linear'],['number', ['get', 'index']],0,0.3,150,0.7],
     }
   })
 
@@ -72,7 +77,29 @@ map.addSource('crashes', {
     'layout': {},
     'paint': {
       'line-color': '#ffffff',
-      'line-width': 0.4
+      'line-width': 0.6
+    }
+  });
+
+
+  //Blank highlight feature
+  map.addSource('highlight-feature', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: []
+    }
+  })
+
+  //Layer to complete the highlight
+
+  map.addLayer({
+    id: 'highlight-line',
+    type: 'line',
+    source: 'highlight-feature',
+    paint: {
+      'line-width': 2,
+      'line-color': 'white',
     }
   });
 
@@ -94,12 +121,12 @@ map.addLayer({
             'interpolate',
             ['linear'],
             ['number', ['get', 'cumm_tot']],
-            0,8,
-            4,12,
-            20,16,
-            50,20,
-            100,22,
-            200,26],
+            0,10,
+            4,14,
+            20,18,
+            50,22,
+            100,25,
+            200,30],
             'circle-color': [
               'interpolate',
               ['linear'],
@@ -108,8 +135,8 @@ map.addLayer({
               '#8fe3bd',
               100,
               '#039252'],
-              'circle-opacity': 0.8
-            }
+              'circle-opacity': 0.9
+            },
       })
 
 
@@ -122,12 +149,12 @@ map.addLayer({
                   'interpolate',
                   ['linear'],
                   ['number', ['get', 'cumm_bp']],
-                  0,8,
-                  4,12,
-                  20,16,
-                  50,20,
-                  100,22,
-                  200,26],
+                  0,10,
+                  4,14,
+                  20,18,
+                  50,22,
+                  100,25,
+                  200,30],
                   'circle-color': [
                     'interpolate',
                     ['linear'],
@@ -136,7 +163,7 @@ map.addLayer({
                     '#8fe3bd',
                     100,
                     '#039252'],
-                    'circle-opacity': 0.8
+                    'circle-opacity': 0.9
                   }
             })
 
@@ -150,12 +177,12 @@ map.addLayer({
                         'interpolate',
                         ['linear'],
                         ['number', ['get', 'cumm_bus']],
-                        0,8,
-                        4,12,
-                        20,16,
-                        50,20,
-                        100,22,
-                        200,26],
+                        0,10,
+                        4,14,
+                        20,18,
+                        50,22,
+                        100,25,
+                        200,30],
                         'circle-color': [
                           'interpolate',
                           ['linear'],
@@ -164,7 +191,7 @@ map.addLayer({
                           '#8fe3bd',
                           100,
                           '#039252'],
-                          'circle-opacity': 0.8
+                          'circle-opacity': 0.9
                         }
                   })
 
@@ -178,12 +205,12 @@ map.addLayer({
                               'interpolate',
                               ['linear'],
                               ['number', ['get', 'cumm_gen']],
-                              0,8,
-                              4,12,
-                              20,16,
-                              50,20,
-                              100,22,
-                              200,26],
+                              0,10,
+                              4,14,
+                              20,18,
+                              50,22,
+                              100,25,
+                              200,30],
                               'circle-color': [
                                 'interpolate',
                                 ['linear'],
@@ -192,7 +219,7 @@ map.addLayer({
                                 '#8fe3bd',
                                 100,
                                 '#039252'],
-                                'circle-opacity': 0.8
+                                'circle-opacity': 0.9
                               }
                         })
 
@@ -203,15 +230,17 @@ map.addLayer({
       'layout': {
       'text-field': ['concat','$',['get','cumm_tot'],'M'],
            'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_tot']],
-           0,6,
-           4,7,
-           20,8,
-           50,9,
-           100,10,
-           200,12]
+           0,7,
+           4,8,
+           20,9,
+           50,10,
+           100,12,
+           200,14],
+           'text-allow-overlap': true
           },
       'paint': {
-      'text-color': '#069'}
+      'text-color': '#303030',
+    }
       });
 
       map.addLayer({
@@ -221,15 +250,16 @@ map.addLayer({
             'layout': {
             'text-field': ['concat','$',['get','cumm_bp'],'M'],
                  'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_bp']],
-                 0,6,
-                 4,7,
-                 20,8,
-                 50,9,
-                 100,10,
-                 200,12]
+                 0,7,
+                 4,8,
+                 20,9,
+                 50,10,
+                 100,12,
+                 200,14],
+                 'text-allow-overlap': true
                 },
             'paint': {
-            'text-color': '#069'}
+            'text-color': '#303030'}
             });
 
             map.addLayer({
@@ -239,15 +269,16 @@ map.addLayer({
                   'layout': {
                   'text-field': ['concat','$',['get','cumm_bus'],'M'],
                        'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_bus']],
-                       0,6,
-                       4,7,
-                       20,8,
-                       50,9,
-                       100,10,
-                       200,12]
+                       0,7,
+                       4,8,
+                       20,9,
+                       50,10,
+                       100,12,
+                       200,14],
+                       'text-allow-overlap': true
                       },
                   'paint': {
-                  'text-color': '#069'}
+                  'text-color': '#303030'}
                   });
 
                   map.addLayer({
@@ -257,15 +288,16 @@ map.addLayer({
                         'layout': {
                         'text-field': ['concat','$',['get','cumm_gen'],'M'],
                              'text-size': ['interpolate',['linear'],['number', ['get', 'cumm_gen']],
-                             0,6,
-                             4,7,
-                             20,8,
-                             50,9,
-                             100,10,
-                             200,12]
+                             0,7,
+                             4,8,
+                             20,9,
+                             50,10,
+                             100,12,
+                             200,14],
+                             'text-allow-overlap': true
                             },
                         'paint': {
-                        'text-color': '#069'}
+                        'text-color': '#303030'}
                         });
 
 
@@ -310,6 +342,7 @@ map.addLayer({
       })
 
 
+
       map.setLayoutProperty('capital', 'visibility', 'visible');
       map.setLayoutProperty('label-style', 'visibility', 'visible');
       map.setLayoutProperty('ped-bike', 'visibility', 'none');
@@ -330,6 +363,7 @@ map.addLayer({
         map.setLayoutProperty('general', 'visibility', 'none');
         map.setLayoutProperty('label-style-gen', 'visibility', 'none');
 })
+
 
 $('#bp').on('click', function() {
 
@@ -367,69 +401,47 @@ $('#gen').on('click', function() {
   map.setLayoutProperty('label-style-gen', 'visibility', 'visible');
 })
 
-//Blank highlight feature
-map.addSource('highlight-feature', {
-  type: 'geojson',
-  data: {
-    type: 'FeatureCollection',
-    features: []
-  }
-})
-
-//Layer to complete the highlight
-
-map.addLayer({
-  id: 'highlight-line',
-  type: 'line',
-  source: 'highlight-feature',
-  paint: {
-    'line-width': 2,
-    'line-color': 'white',
-  }
-});
 
 })
+
+
 // Create the popups
 
 var popup = new mapboxgl.Popup({
-  closeButton: true,
-  closeOnClick: true
+  closeButton: false,
+  closeOnClick: false
 });
+
+
 
 //Set popups to appear when hovered
 
-map.on('click', function (e) {
+map.on('mousemove', function (e) {
   var features = map.queryRenderedFeatures(e.point, {
-      layers: ['capital','crashes'],
+      layers: ['crashes'],
   });
 
 if (features.length > 0) {
-  var clickedFeature = features[0]
-  if (clickedFeature.layer.id === 'capital') {
-  var dist = clickedFeature.properties.c_dist
-  var index = numberToString(clickedFeature.properties.cumm_tot)
-
+  var hoveredFeature = features[0]
+  var boro = hoveredFeature.properties.borough
+  var numb = hoveredFeature.properties.cd_number
+  var nabe = hoveredFeature.properties.name
+  var index = hoveredFeature.properties.index
+  var inj = hoveredFeature.properties.number_of_persons_injured_sum
+  var fat = hoveredFeature.properties.number_of_persons_killed_sum
   var popupContent = `
     <div class="popup">
-      <b>Council District ${dist}</b><br/>
-      Spending: ${index}
+      <b>${boro} CD ${numb}</b><br/>
+      <a>${nabe}</a><br/>
+      <a>Crash Index: ${index}</a><br/>
+      <a>Annual Injuries: ${inj}</a><br/>
+      <a>Annual Fatalities: ${fat}</a>
     </div>`
 
-    popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);}
-
-    else {
-    var index = numberToString(clickededFeature.properties.index)
+    popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);
 
 
-    var popupContent = `
-      <div class="popup">
-        <b> Street Name: ${index} </b><br/>
-      </div>`
-
-      popup.setLngLat(e.lngLat).setHTML(popupContent).addTo(map);
-  }
-
-    map.getSource('highlight-feature').setData(clickedFeature.geometry);
+    map.getSource('highlight-feature').setData(hoveredFeature.geometry);
 
 }
 
@@ -453,71 +465,39 @@ map.on('mouseleave', 'crashes', function () {
 map.getCanvas().style.cursor = '';
 });
 
-
-
-
-map.on('mouseenter', 'capital', function () {
-map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'capital', function () {
-map.getCanvas().style.cursor = '';
-});
-
-// Get the modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementsByClassName('modal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementsByClassName("btn-modal");
+
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close");
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
+// When the user clicks the button, open the modal
+btn[0].onclick = function() {
+    modal[0].style.display = "block";
 }
 
+btn[1].onclick = function() {
+    modal[1].style.display = "block";
+}
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+span[0].onclick = function() {
+    modal[0].style.display = "none";
 }
 
+span[1].onclick = function() {
+    modal[1].style.display = "none";
+}
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
-//Create rudimentary bike routes toggle
 
-//var toggleableLayerIds = ['bike routes'];
 
-//for (var i = 0; i < toggleableLayerIds.length; i++) {
-//  var id = toggleableLayerIds[i];
-
-//  var link = document.createElement('a');
-//  link.href = '#';
-//  link.className = 'active';
-//  link.textContent = id;
-
-//  link.onclick = function(e) {
-//    var clickedLayer = this.textContent;
-//    e.preventDefault();
-//    e.stopPropagation();
-
-//    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-
-//    if (visibility === 'visible') {
-//      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-//      this.className = '';
-//    } else {
-//      this.className = 'active';
-//      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-//    }
-//  };
-
-//  var layers = document.getElementById('menu');
-//  layers.appendChild(link);
-//}
+$(document).ready(function () {
+    $('#all').trigger('click');
+});

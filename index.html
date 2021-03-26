@@ -39,20 +39,140 @@
   <h2>View Capital Investments Over Time</h2>
 
   <p id = 'slider-direction'> Drag the slider to see cummulative DOT capital spending on street improvements in each
-    Community District over the next five fiscal years. </p>
+    Community District over the next five year capital program. </p>
 
   <div class='session' id='sliderbar'>
-    <h3>Fiscal Year<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+    <h2>Fiscal Year<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
   <span class="tooltiptext">July 1 - June 30</span>
-</div> <label id='fiscal-year'>2021</label></h3>
+</div> <label id='fiscal-year'>2021</label></h2>
     <input id='slider' class='row' type='range' min='2021' max='2025' step='1' value='2021' />
   </div>
 
+
+<div class = "layerselectorcontainer">
+    <h3 id="pt-filter-label">Filter Investments by Project Type<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+  <span class="pt-text"><div id='pt-desc'>Project types were determined based on a review Project Scope Summaries
+  included in the Capital Project Detail documents produced by NYC OMB. </div></span>
+</div> </h3>
+
+<fieldset class="pt-select">
+    <class="button-group">
+      <input type="radio" id="all" name="pt" value="all">
+      <label for="all">All Street Improvement Projects</label><br>
+      <input type="radio" id="bp" name="pt" value="bp">
+      <label for="bp">Bicycle & Pedestrian Improvements</label><br>
+      <input type="radio" id="bus" name="pt" value="bus">
+      <label for="bus">Bus Network Improvements</label><br>
+      <input type="radio" id="gen" name="pt" value="gen">
+      <label for="gen">Comprehensive Street Reconstruction</label><br>
+</fieldset>
+</div>
+
+<h2>
+    Serious Crashes in 2020
+</h2>
+
+<p>Is DOT funding being allocated to the areas with the most crashes that caused
+  injuries or fatalities?</p>
+
+<h3>Community District Crash Index<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+<span class="pt-text"><div id='pt-desc'>The index combines monthly injuries in each Community District with the total
+annual fatalities.</div></span>
+</div></h3>
+
+<div class = 'legendcontainer'>
+
+  <div id="legendbar">
+
+    <div class="column2" id="c1">
+    </div>
+    <div class="column2" id="c2">
+    </div>
+    <div class="column2" id="c3">
+    </div>
+    <div class="column2" id="c4">
+    </div>
+    <div class="column2" id="c5">
+    </div>
+
+  </div>
+
+  <div id="keybar">
+
+    <div class="column3"><p class='keynum'>0</p>
+    </div>
+    <div class="column3"><p class='keynum'>22</p>
+    </div>
+    <div class="column3"><p class='keynum'>44</p>
+    </div>
+    <div class="column3"><p class='keynum'>65</p>
+    </div>
+    <div class="column3"><p class='keynum'>95</p>
+    </div>
+
+  </div>
+</div>
+
+<div class='btn-container'>
+
   <!-- Trigger/Open The Modal -->
-<button id="myBtn"><i class="fas fa-traffic-light"></i> Methodology</button>
+<button class='btn-modal' id="btn-method"><i class="fas fa-traffic-light"></i> Methodology</button>
+
+<button class='btn-modal' id="btn-sources"><i class="fas fa-info-circle"></i> Sources</button>
+
+</div>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id='bkgd'>
+    <h2>Background</h2>
+    <p>The NYC Mayor's Office of Management & Budget (OMB) develops and releases
+    the administration's adopted Five Year Capital Budget every year. The plan
+    includes funding for capital projects across all City agencies for the next five
+    fiscal years. Projects that improve the safety of City streets are undertaken by
+    the Department of Transportation (DOT), but are sometimes also managed by the
+    Department of Design & Construction (DDC) when work involves rebuilding water mains
+     or sewers in addition to street construction.</p>
+   </div>
+   <div id='pjs'>
+     <h2>Finding the Right Projects</h2>
+     <p>The City funds thousands of projects in each five year budget, so finding the
+       ones that make our streets safer is a challenge. Luckily, Chris Whong at qri
+       has been able to scrape the <a class='link' href=https://www1.nyc.gov/site/omb/publications/fy21-accp.page>detailed PDFs</a> that include important scope and location
+       data and create <a class='link' href=https://qri.cloud/chriswhong/nyc_capital_project_detail_data>usable tables</a>. Unfortunately, location
+       data is often difficult to source for these projects because they are often tagged as "Citywide" or as affecting an
+        entire borough when that is actually not true. To mitigate this, I used the Capital Budget knowledge I gained as
+         Supervising Analyst in OMB's DOT Unit and Google to review individual scope information for projects that
+         may impact street safety. After selecting DOT and DDC projects that appear to meet a broad definition of street improvement,
+         I assigned the Community District (or Districts) that seemed most accurate if they were not already listed in the data.
+    </div>
+    <div id='pts'>
+      <h2>Included Project Types<h2>
+      <h3>Bicycle & Pedestrian Improvements</h3>
+      <p>These projects usually involve improving or building bike lanes, pedestrian plazas, and other related infrastructure.
+        After completion, these projects make cycling and walking safer by providing protection and separation from traffic and
+        employ other <a class='link' href=https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/visibility-sight-distance/>techniques such as day-lighting at intersections to improve visibility</a>, allowing drivers to see pedestrians
+        and cyclists before making a turn. Bicycle and pedestrian improvements are often linked within the same project scope, so
+        it would be difficult to separate them.</p>
+      <h3>Bus Network Improvements</h3>
+      <p>These projects include bus lanes, queue jumps, and bus bulbs that speed up buses
+    </div>
+
+    <div id='pics'>
+
+      <img class='fig' src="img/daylight.png">
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -62,60 +182,12 @@
 
 </div>
 
-<div class = "legend">
-
-<h2 id = "legendtitle">
-
-    Serious Crashes in 2020
-
-</h2>
-
-<p>Is DOT funding being allocated to the areas with the most crashes that caused
-  injuries or fatalities? This layer shows an index of serious crashes aggregated by Community District.
-
-<div class="color-code">
-
-  <div class="colors" id="c1"></div> </br>
-  <div class="colors" id="c2"></div> </br>
-  <div class="colors" id="c3"></div> </br>
-  <div class="colors" id="c4"></div> </br>
-  <div class="colors" id="c5"></div> </br>
-
-</div>
-
-<div class="color-labels-container">
-  <div class="color-label" id="l1">Crash Severity Index < 2 </div> </br>
-  <div class="color-label" id="l2">Crash Severity Index 2-4 </div> </br>
-  <div class="color-label" id="l3">Crash Severity Index 4-6</div> </br>
-  <div class="color-label" id="l4">Crash Severity Index 6-8 </div> </br>
-  <div class="color-label" id="l5">Crash Severity Index > 8 </div>
-</div>
-
-  </div>
-
-
-<div id = sources>
-
-  Data via NYC DOT Street Centerlines </br>
-  Note: Data does not include temporary bike lanes or open streets.
-
-</div>
-
 </div>
 
 
 
 <div id = "map-container">  </div>
 
-
-<div class = "layerselectorcontainer">
-  <div class="btn-group">
-    <button type="button" class="btn btn-primary" id="all">All Projects</button>
-    <button type="button" class="btn btn-primary" id="bp">Bike & Ped</button>
-    <button type="button" class="btn btn-primary" id="bus">Bus</button>
-    <button type="button" class="btn btn-primary" id="gen">General</button>
-  </div>
-</div>
 
 </div>
 
