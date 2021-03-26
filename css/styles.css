@@ -1,5 +1,5 @@
-html, body, .container, #text-container, #map-container{
-  height:100%;
+html, body, .container, #text-container, #map-container {
+  height: 100%;
   margin: 0;
   overflow: hidden;
 }
@@ -10,13 +10,14 @@ body {
   font-family: sans-serif;
   background-color: white;
   font-size: 62.5%;
-  color: #333333}
+  color: #333333
+}
 
-.container{
+.container {
   display: flex;
 }
 
-#text-container{
+#text-container {
   position: relative;
   float: left;
   text-align: left;
@@ -44,7 +45,8 @@ h3 {
   font-family: Helvetica, sans-serif;
   font-size: 1.0rem;
   font-weight: bold;
-  color: #333333;}
+  color: #333333;
+}
 
 p {
   font-family: Helvetica, sans-serif;
@@ -59,9 +61,8 @@ p {
 }
 
 /* format all links with DOT blue color scheme */
-
 .link {
-  color:#069;
+  color: #069;
   text-decoration: none;
 }
 
@@ -74,16 +75,13 @@ p {
   width: 90%;
 }
 
-
 .label {
   width: 15%;
   display: inline-block;
   text-align: center;
 }
 
-
 /* colors for legend bar */
-
 #c1 {
   background-color: #517CAD;
 }
@@ -105,7 +103,6 @@ p {
 }
 
 /* format the container for all of our filters/radio buttons */
-
 .filter-container {
   position: relative;
   float: left;
@@ -124,7 +121,6 @@ p {
   color: #069;
 }
 
-
 #sources {
   position: relative;
   float: left;
@@ -135,7 +131,7 @@ p {
 #map-container {
   flex-grow: 1;
   overflow: hidden;
-  }
+}
 
 .popup {
   width: 100%;
@@ -148,16 +144,24 @@ p {
 
 /*  modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* modal box */
@@ -201,14 +205,12 @@ p {
   text-align: center;
   padding: 5px 0;
   border-radius: 8px;
-
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 100%;
   left: 50%;
   margin-left: -60px;
-
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
@@ -221,8 +223,7 @@ p {
 }
 
 /* tooltip text for project types */
-
-.tooltip .pt-text{
+.tooltip .pt-text {
   visibility: hidden;
   width: 180px;
   height: 60px;
@@ -234,14 +235,12 @@ p {
   padding: 5px 0;
   border-radius: 8px;
   opacity: 0.8;
-
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 100%;
   left: 90%;
   margin-left: -60px;
-
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
@@ -252,7 +251,6 @@ p {
   opacity: 1;
 }
 
-
 #pt-desc {
   margin: 4px 8px 4px 8px;
 }
@@ -262,8 +260,7 @@ p {
 }
 
 /* tooltip text for crash index */
-
-.tooltip .id-text{
+.tooltip .id-text {
   visibility: hidden;
   width: 180px;
   height: 40px;
@@ -275,14 +272,12 @@ p {
   padding: 5px 0;
   border-radius: 8px;
   opacity: 0.8;
-
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 100%;
   left: 90%;
   margin-left: -60px;
-
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
@@ -298,12 +293,10 @@ p {
 }
 
 /* more formatting for radio buttons group */
-
-
-.layerselectorcontainer{
-position:relative;
-float: left;
-width: 100%;
+.layerselectorcontainer {
+  position: relative;
+  float: left;
+  width: 100%;
 }
 
 fieldset {
@@ -325,21 +318,17 @@ label {
   font-family: Helvetica, sans-serif;
 }
 
-
 #pt-filter-label {
   margin: 0px;
 }
 
 /* container for the legend pieces */
-
-
-.legendcontainer{
+.legendcontainer {
   width: 100%;
   height: 35px;
 }
 
 /* legend bar */
-
 .column2 {
   float: left;
   width: 18%;
@@ -347,7 +336,6 @@ label {
 }
 
 /* legend scale/key */
-
 .column3 {
   float: left;
   width: 18%;
@@ -359,10 +347,7 @@ label {
   margin: 4px;
 }
 
-
 /* modal buttons */
-
-
 .btn-container {
   padding-top: 20px;
   width: 100%;
@@ -382,7 +367,6 @@ label {
   font-size: 0.8rem;
 }
 
-
 .btn-modal:focus {
   outline-color: #069;
   outline-width: thick;
@@ -391,8 +375,6 @@ label {
 }
 
 /* formatting for content in the modal */
-
-
 #bkgd {
   width: 100%;
 }
@@ -403,12 +385,13 @@ label {
 
 #pts {
   width: 50%;
-  position: relative;;
+  position: relative;
+  ;
   float: left;
 }
 
 #pics {
-  width:40%;
+  width: 40%;
   position: relative;
   float: left;
   padding-left: 10px;
@@ -426,5 +409,5 @@ label {
 #other {
   position: relative;
   float: left;
-  width = 100%;
+  width=100%;
 }

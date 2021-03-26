@@ -20,224 +20,248 @@
 
   <script src="https://kit.fontawesome.com/223e95945f.js" crossorigin="anonymous"></script>
 
+  <!-- add favicons -->
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="android-chrome-192x192" sizes="180x180" href="/android-chrome-192x192.png">
+  <link rel="android-chrome-512x512" sizes="180x180" href="/android-chrome-512x512.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
 </head>
 
 <body>
 
-<div class='container'>
+  <div class='container'>
 
-  <!-- create a master container for the text, legends, sliders, etc. -->
+    <!-- create a master container for the text, legends, sliders, etc. -->
 
-<div id = 'text-container'>
+    <div id='text-container'>
 
-  <h1 id="title">Budgeting for Safer Streets</h1>
+      <h1 id="title">Budgeting for Safer Streets</h1>
 
-  <h2 > Where is NYC Making Capital Investments? </h2>
+      <h2> Where is NYC Making Capital Investments? </h2>
 
-  <p id = 'text'> The City's <a class='link' href=https://www1.nyc.gov/assets/omb/downloads/pdf/cb6-20.pdf>Fiscal Year 2021 Adopted Budget</a> sheds light on where the money is going.
-    As NYC grapples with an impending showdown between a surging number of drivers and newly minted
-    cyclists and pedestrians, measuring spending to improve our streets matters more than ever.
-  </p>
+      <p id='text'> The City's <a class='link' href=https://www1.nyc.gov/assets/omb/downloads/pdf/cb6-20.pdf>Fiscal Year 2021 Adopted Budget</a> sheds light on where the money is going.
+        As NYC grapples with an impending showdown between a surging number of drivers and newly minted
+        cyclists and pedestrians, measuring spending to improve our streets matters more than ever.
+      </p>
 
-  <h2>View Capital Investments Over Time</h2>
+      <h2>View Capital Investments Over Time</h2>
 
-  <!-- directions for the slider that we will build -->
+      <!-- directions for the slider that we will build -->
 
-  <p id = 'slider-direction'> Drag the slider to see cummulative DOT capital spending on street improvements in each
-    Community District over the next five year capital program. </p>
+      <p id='slider-direction'> Drag the slider to see cummulative DOT capital spending on street improvements in each
+        Community District over the next five year capital program. </p>
 
-  <!-- building out the slider to toggle through the fiscal years -->
+      <!-- building out the slider to toggle through the fiscal years -->
 
-  <div class='session' id='sliderbar'>
-    <h2>Fiscal Year
-  <!-- adding a tooltip to the fiscal year -->
-      <div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
-  <span class="tooltiptext">July 1 - June 30</span>
-    <!-- label the fiscal year (will change as year is adjusted) -->
-</div> <label id='fiscal-year'>2021</label></h2>
+      <div class='session' id='sliderbar'>
+        <h2>Fiscal Year
+          <!-- adding a tooltip to the fiscal year -->
+          <div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+            <span class="tooltiptext">July 1 - June 30</span>
+            <!-- label the fiscal year (will change as year is adjusted) -->
+          </div> <label id='fiscal-year'>2021</label>
+        </h2>
 
-  <!-- slider inputs-->
-    <input id='slider' class='row' type='range' min='2021' max='2025' step='1' value='2021' />
-  </div>
-
-  <!-- master container for the radio buttons and associated directions -->
-
-<div class = "layerselectorcontainer">
-    <h3 id="pt-filter-label">Filter Investments by Project Type
-      <!-- add tooltip for the project types -->
-      <div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
-  <span class="pt-text"><div id='pt-desc'>Project types were determined based on a review Project Scope Summaries
-  included in the Capital Project Detail documents produced by NYC OMB. </div></span>
-</div> </h3>
-
-<!-- build out our radio buttons -->
-
-<fieldset class="pt-select">
-    <class="button-group">
-      <input type="radio" id="all" name="pt" value="all">
-      <label for="all">All Street Improvement Projects</label><br>
-      <input type="radio" id="bp" name="pt" value="bp">
-      <label for="bp">Bicycle & Pedestrian Improvements</label><br>
-      <input type="radio" id="bus" name="pt" value="bus">
-      <label for="bus">Bus Network Improvements</label><br>
-      <input type="radio" id="gen" name="pt" value="gen">
-      <label for="gen">Comprehensive Street Reconstruction</label><br>
-</fieldset>
-</div>
-
-<!-- now for the crashes -->
-
-<h2>
-    Serious Crashes in 2020
-</h2>
-
-<p>Is DOT funding being allocated to the areas with the most crashes that caused
-  injuries or fatalities?</p>
-
-  <!-- labeling and creating our legend for the crash index... also includes a tooltip -->
-
-<h3>Community District Crash Index<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
-<span class="id-text"><div id='id-desc'>The index combines monthly injuries in each Community District with the total
-annual fatalities.</div></span>
-</div></h3>
-
-<div class = 'legendcontainer'>
-
-<!-- horizontal legend -->
-
-  <div id="legendbar">
-
-    <div class="column2" id="c1">
-    </div>
-    <div class="column2" id="c2">
-    </div>
-    <div class="column2" id="c3">
-    </div>
-    <div class="column2" id="c4">
-    </div>
-    <div class="column2" id="c5">
-    </div>
-
-  </div>
-
-  <!-- horizontal legend scale -->
-
-
-  <div id="keybar">
-
-    <div class="column3"><p class='keynum'>0</p>
-    </div>
-    <div class="column3"><p class='keynum'>22</p>
-    </div>
-    <div class="column3"><p class='keynum'>44</p>
-    </div>
-    <div class="column3"><p class='keynum'>65</p>
-    </div>
-    <div class="column3"><p class='keynum'>95</p>
-    </div>
-
-  </div>
-</div>
-
-<div class='btn-container'>
-
-  <!-- trigger the modals -->
-
-<button class='btn-modal' id="btn-method"><i class="fas fa-traffic-light"></i> Methodology</button>
-
-<button class='btn-modal' id="btn-sources"><i class="fas fa-info-circle"></i> Sources</button>
-
-</div>
-
-<!-- the modals -->
-<div class="modal">
-
-  <!-- first modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div id='bkgd'>
-    <h2>Background</h2>
-    <p>The NYC Mayor's Office of Management & Budget (OMB) develops and releases
-    the administration's adopted Five Year Capital Budget every year. The plan
-    includes funding for capital projects across all City agencies for the next five
-    fiscal years. Projects that improve the safety of City streets are undertaken by
-    the Department of Transportation (DOT), but are sometimes also managed by the
-    Department of Design & Construction (DDC) when work involves rebuilding water mains
-     or sewers in addition to street construction.</p>
-   </div>
-   <div id='pjs'>
-     <h2>Finding the Right Projects</h2>
-     <p>The City funds thousands of projects in each five year budget, so finding the
-       ones that make our streets safer is a challenge. Luckily, Chris Whong at qri
-       has been able to scrape the <a class='link' href=https://www1.nyc.gov/site/omb/publications/fy21-accp.page>detailed PDFs</a> that include important scope and location
-       data and create <a class='link' href=https://qri.cloud/chriswhong/nyc_capital_project_detail_data>usable tables</a>. Unfortunately, location
-       data is often difficult to source for these projects because they are often tagged as "Citywide" or as affecting an
-        entire borough when that is actually not true. To mitigate this, I used the Capital Budget knowledge I gained as
-         Supervising Analyst in OMB's DOT Unit and Google to review individual scope information for projects that
-         may impact street safety. After selecting DOT and DDC projects that appear to meet a broad definition of street improvement,
-         I assigned the Community District (or Districts) that seemed most accurate if they were not already listed in the data.
-    </div>
-    <div id='pts'>
-      <h2>Included Project Types<h2>
-      <h3>Bicycle & Pedestrian Improvements</h3>
-      <p>These projects usually involve improving or building bike lanes, pedestrian plazas, and other related infrastructure.
-        After completion, these projects make cycling and walking safer by providing protection and separation from traffic and
-        employ other <a class='link' href=https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/visibility-sight-distance/>techniques such as day-lighting at intersections to improve visibility</a>, allowing drivers to see pedestrians
-        and cyclists before making a turn. Bicycle and pedestrian improvements are often linked within the same project scope, so
-        it would be difficult to separate them.</p>
-      <h3>Bus Network Improvements</h3>
-      <p>These projects include <a class='link' href=https://www1.nyc.gov/html/brt/html/about/sbs-features.shtml>bus lanes, queue jumps, and bus bulbs</a> that speed up buses on streets.
-        These improvements have secondary effects similar to many pedestrian and bicycle improvements. In addition to speeding
-        commutes and encouraging more bus ridership, they often improve visibility and calm automobile and truck traffic.
-        In NYC, bus improvements often occur along corridors traversed by <a class='link' href=https://www1.nyc.gov/html/brt/html/about/about.shtml>Select Bus Service</a> which incorporates many elements
-        of Bus Rapid Transit.</p>
-      <h3>Comprehensive Street Reconstruction</h3>
-      <p>Street reconstruction projects are among DOT's biggest and most complex undertakings. <a class='link' href=https://www1.nyc.gov/html/dot/html/infrastructure/capital-projects.shtml>Street reconstruction</a> means that
-        the entire street is being rebuilt from the dirt up, often including utilities, water mains, and sewer lines.
-        This means that these projects are actually often managed by DDC with funding from DOT and other agencies.
-        When streets are rebuilt, they often come with major enhancements that include many of the elements of bicycle, pedestrian, and bus
-        network projects.</p>
-    </div>
-
-    <div id='pics'>
-
-      <img class='fig' src="img/daylight.png">
-      <img class='fig' src="img/bus-bulb.jpg">
-      <img class='fig' src="img/recon.png">
-
-    </div>
-
-    <div id='other'>
-      <h2>What's not included?</h2>
-      <p>While there is no specific breakout, All Projects funding also includes areas such as traffic signals and street lighting
-        which have smaller amounts of capital funding and are often included as elements of larger projects. However, there
-        is funding that is not possible to break out by location and is held as a lump-sum at the City or Borough level.
-        This analysis also does not include expense funding which covers many smaller projects and initiatives that do not
-        meet the City's strict <a class='link' href=https://comptroller.nyc.gov/wp-content/uploads/documents/Directive-10-FAQs-Example-Scenarios.pdf>capital eligibility</a> guidelines. </p>
+        <!-- slider inputs-->
+        <input id='slider' class='row' type='range' min='2021' max='2025' step='1' value='2021' />
       </div>
 
+      <!-- master container for the radio buttons and associated directions -->
+
+      <div class="layerselectorcontainer">
+        <h3 id="pt-filter-label">Filter Investments by Project Type
+          <!-- add tooltip for the project types -->
+          <div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+            <span class="pt-text">
+              <div id='pt-desc'>Project types were determined based on a review Project Scope Summaries
+                included in the Capital Project Detail documents produced by NYC OMB. </div>
+            </span>
+          </div>
+        </h3>
+
+        <!-- build out our radio buttons -->
+
+        <fieldset class="pt-select">
+          <class="button-group">
+            <input type="radio" id="all" name="pt" value="all">
+            <label for="all">All Street Improvement Projects</label><br>
+            <input type="radio" id="bp" name="pt" value="bp">
+            <label for="bp">Bicycle & Pedestrian Improvements</label><br>
+            <input type="radio" id="bus" name="pt" value="bus">
+            <label for="bus">Bus Network Improvements</label><br>
+            <input type="radio" id="gen" name="pt" value="gen">
+            <label for="gen">Comprehensive Street Reconstruction</label><br>
+        </fieldset>
+      </div>
+
+      <!-- now for the crashes -->
+
+      <h2>
+        Serious Crashes in 2020
+      </h2>
+
+      <p>Is DOT funding being allocated to the areas with the most crashes that caused
+        injuries or fatalities?</p>
+
+      <!-- labeling and creating our legend for the crash index... also includes a tooltip -->
+
+      <h3>Community District Crash Index<div class="tooltip"><sup><i class="far fa-question-circle" id="qmark"></i></sup>:
+          <span class="id-text">
+            <div id='id-desc'>The index combines monthly injuries in each Community District with the total
+              annual fatalities.</div>
+          </span>
+        </div>
+      </h3>
+
+      <div class='legendcontainer'>
+
+        <!-- horizontal legend -->
+
+        <div id="legendbar">
+
+          <div class="column2" id="c1">
+          </div>
+          <div class="column2" id="c2">
+          </div>
+          <div class="column2" id="c3">
+          </div>
+          <div class="column2" id="c4">
+          </div>
+          <div class="column2" id="c5">
+          </div>
+
+        </div>
+
+        <!-- horizontal legend scale -->
+
+
+        <div id="keybar">
+
+          <div class="column3">
+            <p class='keynum'>0</p>
+          </div>
+          <div class="column3">
+            <p class='keynum'>22</p>
+          </div>
+          <div class="column3">
+            <p class='keynum'>44</p>
+          </div>
+          <div class="column3">
+            <p class='keynum'>65</p>
+          </div>
+          <div class="column3">
+            <p class='keynum'>95</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class='btn-container'>
+
+        <!-- trigger the modals -->
+
+        <button class='btn-modal' id="btn-method"><i class="fas fa-traffic-light"></i> Methodology</button>
+
+        <button class='btn-modal' id="btn-sources"><i class="fas fa-info-circle"></i> Sources</button>
+
+      </div>
+
+      <!-- the modals -->
+      <div class="modal">
+
+        <!-- first modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div id='bkgd'>
+            <h2>Background</h2>
+            <p>The NYC Mayor's Office of Management & Budget (OMB) develops and releases
+              the administration's adopted Five Year Capital Budget every year. The plan
+              includes funding for capital projects across all City agencies for the next five
+              fiscal years. Projects that improve the safety of City streets are undertaken by
+              the Department of Transportation (DOT), but are sometimes also managed by the
+              Department of Design & Construction (DDC) when work involves rebuilding water mains
+              or sewers in addition to street construction.</p>
+          </div>
+          <div id='pjs'>
+            <h2>Finding the Right Projects</h2>
+            <p>The City funds thousands of projects in each five year budget, so finding the
+              ones that make our streets safer is a challenge. Luckily, Chris Whong at qri
+              has been able to scrape the <a class='link' href=https://www1.nyc.gov/site/omb/publications/fy21-accp.page>detailed PDFs</a> that include important scope and location
+              data and create <a class='link' href=https://qri.cloud/chriswhong/nyc_capital_project_detail_data>usable tables</a>. Unfortunately, location
+              data is often difficult to source for these projects because they are often tagged as "Citywide" or as affecting an
+              entire borough when that is actually not true. To mitigate this, I used the Capital Budget knowledge I gained as
+              Supervising Analyst in OMB's DOT Unit and Google to review individual scope information for projects that
+              may impact street safety. After selecting DOT and DDC projects that appear to meet a broad definition of street improvement,
+              I assigned the Community District (or Districts) that seemed most accurate if they were not already listed in the data.
+          </div>
+          <div id='pts'>
+            <h2>Included Project Types<h2>
+                <h3>Bicycle & Pedestrian Improvements</h3>
+                <p>These projects usually involve improving or building bike lanes, pedestrian plazas, and other related infrastructure.
+                  After completion, these projects make cycling and walking safer by providing protection and separation from traffic and
+                  employ other <a class='link' href=https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/visibility-sight-distance />techniques such as day-lighting at intersections to improve visibility</a>, allowing
+                  drivers to see pedestrians
+                  and cyclists before making a turn. Bicycle and pedestrian improvements are often linked within the same project scope, so
+                  it would be difficult to separate them.</p>
+                <h3>Bus Network Improvements</h3>
+                <p>These projects include <a class='link' href=https://www1.nyc.gov/html/brt/html/about/sbs-features.shtml>bus lanes, queue jumps, and bus bulbs</a> that speed up buses on streets.
+                  These improvements have secondary effects similar to many pedestrian and bicycle improvements. In addition to speeding
+                  commutes and encouraging more bus ridership, they often improve visibility and calm automobile and truck traffic.
+                  In NYC, bus improvements often occur along corridors traversed by <a class='link' href=https://www1.nyc.gov/html/brt/html/about/about.shtml>Select Bus Service</a> which incorporates many elements
+                  of Bus Rapid Transit.</p>
+                <h3>Comprehensive Street Reconstruction</h3>
+                <p>Street reconstruction projects are among DOT's biggest and most complex undertakings. <a class='link' href=https://www1.nyc.gov/html/dot/html/infrastructure/capital-projects.shtml>Street reconstruction</a> means that
+                  the entire street is being rebuilt from the dirt up, often including utilities, water mains, and sewer lines.
+                  This means that these projects are actually often managed by DDC with funding from DOT and other agencies.
+                  When streets are rebuilt, they often come with major enhancements that include many of the elements of bicycle, pedestrian, and bus
+                  network projects.</p>
+          </div>
+
+          <div id='pics'>
+
+            <img class='fig' src="img/daylight.png">
+            <img class='fig' src="img/bus-bulb.jpg">
+            <img class='fig' src="img/recon.png">
+
+          </div>
+
+          <div id='other'>
+            <h2>What's not included?</h2>
+            <p>While there is no specific breakout, All Projects funding also includes areas such as traffic signals and street lighting
+              which have smaller amounts of capital funding and are often included as elements of larger projects. However, there
+              is funding that is not possible to break out by location and is held as a lump-sum at the City or Borough level.
+              This analysis also does not include expense funding which covers many smaller projects and initiatives that do not
+              meet the City's strict <a class='link' href=https://comptroller.nyc.gov/wp-content/uploads/documents/Directive-10-FAQs-Example-Scenarios.pdf>capital eligibility</a> guidelines. </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal">
+
+        <!-- second modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Data Sources</h2>
+          <p>NYC Capital Budget <a class='link' href = https://qri.cloud/chriswhong/nyc_capital_project_detail_data>Detail Data</a> and <a class='link'href=https://qri.cloud/chriswhong/nyc_capital_project_detail_data_geom>Geometries</a> (via qri)</p>
+          <p><a class='link' href=https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95>NYC Motor Vehicle Collisions</a> (via NYC Open Data)</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- div for our map container -->
+
+    <div id="map-container"> </div>
+
+
   </div>
-
-</div>
-
-<div class="modal">
-
-  <!-- second modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
-
-</div>
-
-  <!-- div for our map container -->
-
-<div id = "map-container">  </div>
-
-
-</div>
 
   <!-- bootstrap script library just in case -->
 
@@ -249,12 +273,9 @@ annual fatalities.</div></span>
 
   <!-- jquery script library -->
 
-  <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-      <!-- js script library -->
+  <!-- js script library -->
 
   <script src="js/scripts.js"></script>
 
